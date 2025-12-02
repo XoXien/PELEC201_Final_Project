@@ -1,7 +1,6 @@
 <h1 align="center">PELEC 201 GROUP 2 BSIT 2B</h1>
 <h3 align="center">PELEC 201 Final Project</h3>
 
-<h3 align="left">Connect with me:</h3>
 <p align="left">
 </p>
 
