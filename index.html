@@ -1,11 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Feedbacks</title>
+
+<style>
+    body {
+        font-family: 'Georgia', serif;
+        margin: 0;
+        background: #ffffff;
+        color: #4b004b;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .back-btn {
+        display: flex;
+        align-items: center;
+        color: #c200c9;
+        text-decoration: none;
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .back-btn:hover {
+        opacity: 0.7;
+    }
+
+    .logo {
+        width: 220px;
+    height: 220px;  
+    object-fit: contain; 
+    margin: -10px auto 10px;
+
+    }
+
+    h1 {
+        font-size: 45px;
+        color: #5a0060;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        font-size: 25px;
+        line-height: 1.7;
+        width: 80%;
+        margin: 0 auto 40px;
+        color: #69006f;
+    }
+
+    .gallery {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    .gallery img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 15px;
+        background: linear-gradient(to bottom, #ff8bf9, #c100c5);
+        padding: 8px;
+    }
+
+    @media (max-width: 600px) {
+        .gallery img {
+            width: 46%;
+            height: auto;
+        }
+    }
+</style>
 </head>
+
 <body>
-    
+
+<div class="container">
+
+    <a href="#" class="back-btn">
+        ← Back to Services
+    </a>
+
+    <img src="3d logo.png" class="logo" alt="Your Logo Here">
+
+    <h1>“Client Feedbacks”</h1>
+
+    <p class="description">
+        Every feedback tells a story of trust and satisfaction. Behind every
+        thank-you message and heartfelt review lies the joy of a well-celebrated
+        moment. Each word reminds us why we do what we do — to bring happiness,
+        ease, and beauty to every event we handle. From weddings to birthdays
+        and corporate gatherings, our clients’ smiles are the true measure of
+        our success. Every feedback fuels our passion, inspires our creativity,
+        and strengthens our promise of Asikaso, Serbisyo, at Alaga. Grateful
+        hearts, happy clients — that’s the story behind every #ASALieths moment.
+    </p>
+
+
+    <div class="gallery">
+        <img src="LFEM010624.jpg" alt="Feedback Photo 1">
+        <img src="LFEM011625.jpg" alt="Feedback Photo 2">
+        <img src="LFEM011825.jpg" alt="Feedback Photo 3">
+        <img src="LFEM011924.jpg" alt="Feedback Photo 4">
+    </div>
+
+</div>
+
 </body>
 </html>
+
