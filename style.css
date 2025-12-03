@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to bottom, #5B0A68, #8A1A75, #b1228f);
+  color: #4a235a;
+}
+
+/* Image Wrapper Box */
+.image-box {
+  background: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.image-box img {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.side-images {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Quote Section */
+.quote-section {
+  background: transparent;
+  padding: 70px 20px;
+  margin-top: 40px;
+  color: #fff;
+  text-align: center;
+}
+
+.quote-section h2 {
+  font-size: 60px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.quote-section p {
+  font-size: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Header Styles */
+.header {
+  width: 100%;
+  padding: 25px 40px;
+  background: linear-gradient(to bottom, #5B0A68, #8A1A75, #b1228f);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-link {
+  position: absolute;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 22px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 32px;
+  margin-right: 8px;
+}
+
+.logo {
+  height: 250px;
+}
+
+/* Main Box Styles */
+.main-box {
+  background: #fff;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.main-image {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.side-image {
+  width: 100%;
+  border-radius: 20px;
+}
