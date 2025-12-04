@@ -1,0 +1,222 @@
+/* Main body and background */
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: linear-gradient(#2b003a, #ae22ff, #ff4bff);
+  background-attachment: fixed;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: white;
+}
+.nav-links li {
+  display: inline-block;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* About Section */
+.about-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.about-card {
+  background: #d6d0d7;
+  color: #000;
+  width: 70%;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+.about-content {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  align-items: center;
+}
+.owner-photo {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Services Section */
+.services-section h2 {
+  text-align: center;
+  margin-top: 60px;
+}
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.card {
+  background: #fff;
+  color: #000;
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+.card button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #b000ff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* FAQ Section */
+.faq-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 30px;
+  padding: 50px;
+  background: linear-gradient(135deg, rgba(128,0,255,0.2), rgba(0,0,0,0.6));
+  backdrop-filter: blur(8px);
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 60px auto; /* spacing from other sections */
+}
+
+.faq-title {
+  width: 100%;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.logo-area {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, #ff7bf5, #7c00ff, #120013);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+}
+
+.faq-list {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  background: linear-gradient(135deg, #7c00ff, #240026);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.faq-item:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #a832ff, #3a003c);
+}
+
+.faq-question {
+  font-size: 1rem;
+  font-weight: 500;
+  padding-right: 30px;
+  line-height: 1.4;
+}
+
+.faq-item::after {
+  content: '▾';
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.35s ease;
+  margin-top: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 200px;
+  margin-top: 15px;
+  opacity: 1;
+}
+
+.faq-item.open::after {
+  transform: rotate(180deg);
+}
+
+/* Contact Section */
+.contact-section {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 80px;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+  gap: 15px;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+}
+.contact-form button {
+  padding: 15px;
+  border: none;
+  background: #b000ff;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq-wrapper {
+    padding: 30px;
+  }
+  .logo-area {
+    width: 180px;
+    height: 180px;
+    font-size: 1.2rem;
+  }
+  .faq-title {
+    font-size: 1.8rem;
+  }
+}
