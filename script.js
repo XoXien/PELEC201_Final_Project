@@ -1,25 +1,38 @@
-document.querySelectorAll('.faq-item').forEach(item => {
-    item.addEventListener('click', () => {
-        item.classList.toggle('open');
-    });
+const slider = document.querySelector('.cards-section_services');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('active');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.classList.remove('active');
+});
+slider.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2; // scroll-fast
+  slider.scrollLeft = scrollLeft - walk;
 });
 
-// Optional: Auto-scroll animation for the cards
-const container = document.getElementById('cards-container');
+// Touch support for mobile
+slider.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
 
-let scrollAmount = 0;
-const scrollStep = 2; // px per frame
-const scrollDelay = 20; // ms
-
-function autoScroll() {
-    scrollAmount += scrollStep;
-    if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-        scrollAmount = 0; // reset scroll to start
-    }
-    container.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-    });
-}
-
-setInterval(autoScroll, scrollDelay);
+slider.addEventListener('touchmove', (e) => {
+  const x = e.touches[0].pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2;
+  slider.scrollLeft = scrollLeft - walk;
+});
