@@ -9,6 +9,8 @@ body {
   justify-content: center;
   padding: 40px;
   flex-direction: column;
+  cursor: pointer;      /* hand pointer instead of text cursor */
+  user-select: none;    /* prevents blinking typing cursor */
 }
 
 /* Navbar */
@@ -92,9 +94,15 @@ body {
   gap: 40px;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 60px auto; /* spacing from other sections */
+  margin: 60px auto; 
+  user-select: none;      
+  height: 400px;          /* fixed height */
+  overflow-y: auto;       /* scroll if FAQ exceeds height */
 }
 
+.faq-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
 .faq-title {
   width: 100%;
   text-align: center;
@@ -103,6 +111,7 @@ body {
   font-weight: 700;
   margin-bottom: 20px;
   letter-spacing: 1px;
+  
 }
 
 .logo-area {
@@ -129,6 +138,15 @@ body {
 }
 
 .faq-item {
+    background: linear-gradient(135deg, #7c00ff, #240026);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none; 
+    transition: transform 0.25s ease, background 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
   background: linear-gradient(135deg, #7c00ff, #240026);
   border-radius: 16px;
   padding: 20px;
