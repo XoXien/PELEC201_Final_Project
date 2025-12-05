@@ -8,17 +8,24 @@ body {
 }
 
 .back-link {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    font-size: 18px;
-    color: #a3009a;
+    color: var(--accent-color);
     text-decoration: none;
-    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 20px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    transition: var(--transition);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
-.back-link:hover {
+.back-link:hover,
+.back-link:focus {
+    color: var(--accent-hover);
     text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
 }
 
 .logo {
