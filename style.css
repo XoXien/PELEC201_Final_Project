@@ -184,105 +184,248 @@ main {
 /* ==========================
    NAVBAR
 ========================== */
-/* NAVBAR WRAPPER */
+/* GENERAL */
+:root {
+    --primary-bg: linear-gradient(135deg, rgba(90, 21, 90, 0.9), rgba(201, 120, 179, 0.7));
+    --navbar-bg: linear-gradient(135deg, #f5c8e9, #d4a3c7);
+    --hero-overlay: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    --text-light: #ffffff;
+    --text-dark: #333333;
+    --accent: #bf3bff;
+    --border-radius: 20px;
+    --transition: all 0.3s ease;
+}
+
+/* ✨ SMOOTH ANIMATED GRADIENT BACKGROUND */
+@keyframes animatedGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* FULL-PAGE LOW-OPACITY IMAGE BACKGROUND */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-light);
+
+    /* 🖼️ Background image behind everything */
+    background-image:
+        linear-gradient(135deg, rgba(90, 21, 90, 0.9), rgba(201, 120, 179, 0.7)),
+        url("your-image.jpg");  /* <----- Add your image path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax-like effect */
+    background-repeat: no-repeat;
+
+    /* Gradient animation */
+    background-size: 300% 300%, cover;
+    animation: animatedGradient 15s ease infinite;
+}
+
+/* ✨ FADE-IN ANIMATION */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* NAVIGATION BAR */
 .navbar {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: background 0.3s ease;
+    background: var(--navbar-bg);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1.2s ease forwards;
 }
 
-/* INNER NAV CONTENT */
-.nav_content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1800px; 
-  padding: 20px;      
-  gap: 30px;
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* LOGO */
-.nav_content img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.3);
-  margin-right: 20px;
+.logo {
+    height: 40px;
+    width: auto;
 }
 
-/* NAV LINKS */
-.nav_content a {
-  color: white;
-  text-decoration: none;
-  padding: 14px 25px; 
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,0.3);
-  text-align: center;
-  font-size: 17px;
-  transition: all 0.3s ease;
+.brand-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-dark);
 }
 
-.nav_content a:hover {
-  background: rgba(255,255,255,0.2);
-  border-color: white;
+.nav-links {
+    display: flex;
+    gap: 12px;
 }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    border: 2px solid var(--text-dark);
+    border-radius: var(--border-radius);
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    background-color: var(--accent);
+    color: var(--text-light);
+    border-color: var(--accent);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    padding: 60px 20px;
+    min-height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Transparent overlay on hero */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--hero-overlay);
+    backdrop-filter: blur(4px);
+}
+
+/* Hero image */
+.group-photo {
+    width: 90%;
+    max-width: 800px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 1.5s ease forwards;
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.group-photo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 14px 30px;
+    }
+    .nav-links a {
+        padding: 8px 14px;
+    }
+    .hero {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero {
+        min-height: 280px;
+        padding: 30px 10px;
+    }
+    .group-photo {
+        width: 100%;
+    }
+}
+
+
+
+
 
 /* ==========================
    HERO & ABOUT
 ========================== */
-.hero {
-  width: 100%;
-  padding: 100px 20px 40px;
-  text-align: center;
-}
 
 .about-section {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
 }
+
+
 .about-card {
-  background: #f5f0f8;
-  color: #000;
-  width: 90%;
-  max-width: 900px;
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    width: 1024px;                 
+    max-width: 100%;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 1.3s ease;
 }
+
 .about-card h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #fff;
 }
+
+
 .about-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
+
+
 .owner-photo {
-  width: 250px;
-  border-radius: 15px;
+    width: 480px !important;       
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
+
+
 .owner-text {
-  max-width: 500px;
-  text-align: left;
-  font-size: 1rem;
-  line-height: 1.6;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.5;
+    flex: 1;                    
 }
+
+
+@media (max-width: 900px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .owner-photo {
+        width: 90%;                
+        max-width: 480px;
+    }
+
+    .owner-text {
+        font-size: 18px;
+    }
+}
+
 
 /* ==========================
    SERVICES SECTION
