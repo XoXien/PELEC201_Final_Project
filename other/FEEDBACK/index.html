@@ -6,99 +6,126 @@
 <title>Client Feedbacks</title>
 
 <style>
-    body {
-        font-family: 'Georgia', serif;
-        margin: 0;
-        background: #ffffff;
-        color: #4b004b;
-        text-align: center;
-        padding: 30px;
-    }
+/* GLOBAL */
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-align: center;
 
-    .container {
-        max-width: 1000px;
-        margin: auto;
-    }
+    /* Premium violet gradient background */
+    background: linear-gradient(135deg, #3a0049, #7a0099, #c800ff);
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+}
 
-    .back-btn {
-        display: flex;
-        align-items: center;
-        color: #c200c9;
-        text-decoration: none;
-        font-size: 15px;
-        margin-bottom: 5px;
-    }
+/* Background animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    .back-btn:hover {
-        opacity: 0.7;
-    }
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
 
-    .back-link {
-    color: var(--accent-color);
+/* BACK BUTTON */
+.back-btn, .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    color: #ffd6ff;
     text-decoration: none;
-    font-size: 20px;
-    padding: 15px 20px;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    transition: 0.25s ease;
     position: absolute;
     top: 20px;
     left: 20px;
-    transition: var(--transition);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.08);
 }
 
-.back-link:hover,
-.back-link:focus {
-    color: var(--accent-hover);
-    text-decoration: underline;
-    background-color: rgba(255, 255, 255, 0.15);
+.back-btn:hover,
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.22);
     transform: scale(1.05);
+    color: white;
 }
 
-    .logo {
-        width: 220px;
-    height: 220px;  
-    object-fit: contain; 
-    margin: -10px auto 10px;
+/* LOGO */
+.logo {
+    width: 180px;
+    height: 180px;
+    margin: 10px auto 20px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.4));
+}
 
-    }
+/* TITLE */
+h1 {
+    font-size: 42px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffe7ff;
+    letter-spacing: 1px;
+}
 
-    h1 {
-        font-size: 45px;
-        color: #5a0060;
-        margin-bottom: 20px;
-    }
+/* DESCRIPTION TEXT */
+.description {
+    font-size: 22px;
+    line-height: 1.6;
+    width: 85%;
+    margin: 0 auto 40px;
+    color: #ffd6ff;
+    opacity: 0.9;
+}
 
-    .description {
-        font-size: 25px;
-        line-height: 1.7;
-        width: 80%;
-        margin: 0 auto 40px;
-        color: #69006f;
-    }
+/* GALLERY */
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
 
-    .gallery {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
-    }
+/* IMAGES */
+.gallery img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 18px;
 
+    /* Beautiful glowing violet frame */
+    padding: 6px;
+    background: linear-gradient(145deg, #ff6bf7, #a100c0);
+
+    /* Shadow for premium look */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    transition: 0.25s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
     .gallery img {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 15px;
-        background: linear-gradient(to bottom, #ff8bf9, #c100c5);
-        padding: 8px;
+        width: 45%;
+        height: auto;
     }
-
-    @media (max-width: 600px) {
-        .gallery img {
-            width: 46%;
-            height: auto;
-        }
-    }
+}
 </style>
+
 </head>
 
 <body>
