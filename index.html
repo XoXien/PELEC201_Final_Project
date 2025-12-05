@@ -1,140 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Management</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lileths Flower and Event logo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero">
-    <nav class="navbar">
-      <h1 class="logo">Event Organizer</h1>
-      <ul class="nav-links">
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
-  </header>
+  <div class="app" id="app">
 
-  <section class="about-section">
-    <div class="about-card">
-        <h2>About Us</h2>
-        <div class="about-content">
+    <!-- SPLASH SCREEN -->
+    <div class="splash" role="dialog" aria-modal="true" aria-label="Loading">
+      <div class="logo" aria-hidden="true">
+        <img src="3d_Logo.png" alt="Lileths Flower and Event logo" />
+      </div>
+
+      <div class="title">Lileths Flower and Event</div>
+      <div class="subtitle">Preparing things for you…</div>
+
+      <div class="progress-wrap" aria-hidden="true">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <div class="splash-controls">
+        <button class="skip" id="skipBtn">Skip</button>
+        <small class="est-load">Estimated load</small>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+      <!-- HERO / NAVBAR -->
+      <header class="hero" id="home">
+        <nav class="navbar">
+          <div class="nav_content">
+            <div class="logo">
+              <img src="logo.png" alt="logo">
+              <label style="color: white;">Lileth's Flower and <br> Event Management</label>
+            </div>
+
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- ABOUT SECTION -->
+      <section class="about-section" id="about">
+        <div class="about-card">
+          <h2>About Us</h2>
+          <div class="about-content">
             <img src="owner.jpg" alt="Owner" class="owner-photo">
-            <p class="owner-text"><strong>Owner</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet purus eu elit varius cursus. Integer tempus elit a risus tincidunt malesuada.</p>
+            <p class="owner-text">
+              <strong>Owner</strong><br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet purus eu elit varius cursus.
+            </p>
+          </div>
         </div>
-    </div>
-  </section>
-  
-  
-  <section class="cards-section_services">
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Promos">
-      <div class="card-content">
-        <h3>Promos</h3>
-        <p>Enjoy exclusive discounts and special packages from Lileth’s Flowers and Event Management — perfect for weddings, debuts, and all your special occasions. Book early and save more!</p>
-        <button>Learn more</button>
-      </div>
-    </div>
+      </section>
 
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Events">
-      <div class="card-content">
-        <h3>Events</h3>
-        <p>From intimate gatherings to grand celebrations, Lileth’s Flowers and Event Management makes every event flow smoothly and beautifully — stress-free, organized, and full of joy.</p>
-        <button>Learn more</button>
-      </div>
-    </div>
+      <!-- SERVICES SECTION (Horizontal Card Slider) -->
+      <h2 class="services-title" id="services">SERVICES</h2>
+      <section class="cards-section_services">
+        <div class="cards-track">
 
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Save the Date">
-      <div class="card-content">
-        <h3>Save the Date</h3>
-        <p>Turn your love story into timeless memories. Our team ensures every pre-nup shoot runs perfectly — capturing every romantic moment effortlessly.</p>
-        <button>Learn more</button>
-      </div>
-    </div>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Promos">
+            <div class="card-content">
+              <h3>Promos</h3>
+              <p>Enjoy exclusive discounts and special packages...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Meetings">
-      <div class="card-content">
-        <h3>Meetings</h3>
-        <p>Every successful event begins with understanding your vision. Our client meetings are filled with ideas, laughter, and excitement — because your story inspires our work.</p>
-        <button>Learn more</button>
-      </div>
-    </div>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Events">
+            <div class="card-content">
+              <h3>Events</h3>
+              <p>From intimate gatherings to grand celebrations...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Behind The Scenes">
-      <div class="card-content">
-        <h3>Behind The Scenes</h3>
-        <p>Where the magic happens! Go behind the scenes with Team Lileth’s as we plan, style, and coordinate every detail to bring your dream event to life.</p>
-        <button>Learn more</button>
-      </div>
-    </div>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Save the Date">
+            <div class="card-content">
+              <h3>Save the Date</h3>
+              <p>Turn your love story into timeless memories...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-    <div class="card">
-      <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Feedbacks">
-      <div class="card-content">
-        <h3>Feedbacks</h3>
-        <p>Your happiness is our success! We're grateful for every kind word and smile from our clients — proof of our #ASALileths truly special service.</p>
-        <button>Learn more</button>
-      </div>
-    </div>
-    </section>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Meetings">
+            <div class="card-content">
+              <h3>Meetings</h3>
+              <p>Every successful event begins with understanding your vision...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-  <div class="faq-wrapper">
-    <div class="faq-title">FREQUENTLY ASKED QUESTIONS</div>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Behind The Scenes">
+            <div class="card-content">
+              <h3>Behind The Scenes</h3>
+              <p>Where the magic happens...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-    <div class="logo-area">
-      <img src="3d logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
-    </div>
+          <div class="card">
+            <img src="4a4eab56-7fda-4183-9f96-17427fddea54.png" alt="Feedbacks">
+            <div class="card-content">
+              <h3>Feedbacks</h3>
+              <p>Your happiness is our success...</p>
+              <button>Learn more</button>
+            </div>
+          </div>
 
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-question">What type of events do you manage?</div>
-        <div class="faq-answer">
-          We handle a wide range of events including Weddings, Debut, Birthday, Anniversaries and Reunion, Children, Thetned parties, Company Events, Pageants and Concerts, Advertising and Marketing Events, Product Launching, Promotion, Exhibit, Conferences, and Training Workshops.
+        </div>
+      </section>
+
+      <!-- FAQ SECTION -->
+      <div class="faq-wrapper">
+        <div class="faq-title">FREQUENTLY ASKED QUESTIONS</div>
+
+        <div class="logo-area">
+          <img src="3d logo.png" alt="Logo">
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">What type of events do you manage?</div>
+            <div class="faq-answer">
+              We handle a wide range of events including Weddings...
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">What services do you offer?</div>
+            <div class="faq-answer">
+              We offer ON-THE-DAY COORDINATION...
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">Do you require a downpayment?</div>
+            <div class="faq-answer">
+              Yes, a non-refundable reservation fee is required...
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">How can we contact you?</div>
+            <div class="faq-answer">
+              You can reach us via Facebook, phone, or email...
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="faq-item">
-        <div class="faq-question">What services do you offer?</div>
-        <div class="faq-answer">
-          We offer ON-THE-DAY COORDINATION, BUDGETARIAN PACKAGE, and THREE-IN-ONE SUPERSAVER DEALS including program detailing, supplier coordination, bridal entourage flowers, emcee services, and various freebies.
-        </div>
-      </div>
+      <!-- CONTACT SECTION -->
+      <section class="contact-section" id="contact">
+        <h2>Get in Touch</h2>
+        <form class="contact-form">
+          <input type="text" placeholder="Full Name">
+          <input type="email" placeholder="Email Address">
+          <textarea placeholder="Your Message"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
 
-      <div class="faq-item">
-        <div class="faq-question">Do you require a downpayment and is it refundable?</div>
-        <div class="faq-answer">
-          Yes, a non-refundable reservation fee (30–50%) is required to secure your booking, with the remaining balance due before the event date.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question">How can we contact you for inquiries or bookings?</div>
-        <div class="faq-answer">
-          You can contact us via our official Facebook page, phone number, or email for faster response and booking assistance.
-        </div>
-      </div>
-    </div>
+    </main>
   </div>
 
-    <section class="contact-section">
-    <h2>Get in Touch</h2>
-    <form class="contact-form">
-      <input type="text" placeholder="Full Name">
-      <input type="email" placeholder="Email Address">
-      <textarea placeholder="Your Message"></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>    
-
   <script src="script.js"></script>
-
 </body>
 </html>
