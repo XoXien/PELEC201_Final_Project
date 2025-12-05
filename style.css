@@ -184,6 +184,7 @@ main {
 /* ==========================
    NAVBAR
 ========================== */
+/* NAVBAR WRAPPER */
 .navbar {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -198,38 +199,41 @@ main {
   z-index: 1000;
   transition: background 0.3s ease;
 }
+
+/* INNER NAV CONTENT */
 .nav_content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
-  padding: 0 20px;
-  max-width: 1800px;
-  padding: 20px;
-  gap: 30px; 
+  max-width: 1800px; 
+  padding: 20px;      
+  gap: 30px;
 }
+
+/* LOGO */
 .nav_content img {
   width: 70px;
   height: 70px;
-  border-radius: 50px;
+  border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.3);
   margin-right: 20px;
 }
+
+/* NAV LINKS */
 .nav_content a {
   color: white;
   text-decoration: none;
-  padding: 14px 16px;
+  padding: 14px 25px; 
   border-radius: 50px;
   border: 1px solid rgba(255,255,255,0.3);
   text-align: center;
-  width: 60px;
   font-size: 17px;
   transition: all 0.3s ease;
 }
+
 .nav_content a:hover {
   background: rgba(255,255,255,0.2);
-  color: white;
   border-color: white;
 }
 
