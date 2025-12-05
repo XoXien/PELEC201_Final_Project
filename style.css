@@ -1,100 +1,6 @@
-/* ------------------ First CSS (Contact Section Styles) ------------------ */
-body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(#5b0f47, #2e0430);
-    font-family: 'Poppins', sans-serif;
-    color: white;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px;
-}
-
-.left-section {
-    flex: 1;
-}
-
-.staff-img {
-    width: 600px;
-    max-width: 100%;
-}
-
-.right-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.contact-card {
-    background: linear-gradient(to bottom, #990087, #47004A);
-    padding: 40px;
-    border-radius: 30px;
-    width: 80%;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-
-.logo {
-    width: 90px;
-    height: 90px;
-    margin: auto;
-    margin-bottom: 20px;
-    border-radius: 50%;
-    background: #5b0f47;
-    border: 2px solid white;
-    box-shadow: 0 0 20px #ff7edb, 0 0 40px #560048;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo img {
-    width: 125%; 
-    height: 125%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.contact-card h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.contact-card p {
-    font-size: 15px;
-    line-height: 1.5;
-    opacity: 0.9;
-}
-
-form input,
-form textarea {
-    width: 81%;
-    padding: 12px;
-    border-radius: 6px;
-    border: 2.7px solid black;
-    margin: 12px 0;
-    font-size: 15px;
-    background: white;
-    color: white;
-}
-
-form textarea {
-    height: 120px;
-    resize: none;
-}
-
-.social-icons {
-    margin-top: 25px;
-    font-size: 14px;
-    opacity: 0.9;
-}
-
-/* ------------------ Second CSS (Preserved as-is) ------------------ */
+/* ==========================
+   RESET & ROOT VARIABLES
+========================== */
 :root {
   --bg1: #4facfe;
   --bg2: #667eea;
@@ -102,7 +8,6 @@ form textarea {
   --accent2: #f6d365;
 }
 
-/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -119,14 +24,29 @@ html, body {
   user-select: none;
 }
 
-/* App wrapper */
+/* ==========================
+   APP WRAPPER & MAIN
+========================== */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Splash Screen */
+main {
+  padding: 3rem;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.app.loaded main {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================
+   SPLASH SCREEN
+========================== */
 .splash {
   position: fixed;
   inset: 0;
@@ -143,7 +63,6 @@ html, body {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* Splash Logo */
 .splash-logo {
   width: 130px;
   height: 130px;
@@ -167,7 +86,6 @@ html, body {
   100% { transform: scale(1) translateY(0); }
 }
 
-/* Splash Text */
 .title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -181,7 +99,6 @@ html, body {
   text-align: center;
 }
 
-/* Progress bar */
 .progress-wrap {
   width: 340px;
   max-width: 88vw;
@@ -198,7 +115,6 @@ html, body {
   transition: width 0.3s ease-in-out;
 }
 
-/* Skip Button */
 .skip {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
@@ -214,30 +130,19 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Hide splash when loaded */
 .app.loaded .splash {
   opacity: 0;
   transform: scale(0.98);
   pointer-events: none;
 }
 
-/* Main content transition */
-main {
-  padding: 3rem;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.app.loaded main {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Navbar */
+/* ==========================
+   NAVBAR
+========================== */
 .navbar {
-  background: rgba(255, 255, 255, 0.05); /* transparent glass */
-  backdrop-filter: blur(12px); /* glass blur */
-  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   position: fixed;
   top: 0;
   width: 100%;
@@ -280,14 +185,15 @@ main {
   border-color: white;
 }
 
-/* Hero Section */
+/* ==========================
+   HERO & ABOUT
+========================== */
 .hero {
   width: 100%;
   padding: 100px 20px 40px;
   text-align: center;
 }
 
-/* About Section */
 .about-section {
   display: flex;
   justify-content: center;
@@ -326,7 +232,9 @@ main {
   line-height: 1.6;
 }
 
-/* Services Section */
+/* ==========================
+   SERVICES SECTION
+========================== */
 .services-title {
   width: 100%;
   text-align: center;
@@ -385,12 +293,45 @@ main {
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
-.card button:hover {
-  background: #ff55ff;
-  transform: translateY(-2px);
+/* Ultra-subtle scrollbar for cards section */
+.cards-section_services::-webkit-scrollbar {
+    height: 4px; /* very thin */
 }
 
-/* FAQ Section */
+.cards-section_services::-webkit-scrollbar-track {
+    background: transparent; /* invisible track */
+}
+
+.cards-section_services::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0); /* fully invisible by default */
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+/* Show scrollbar thumb on hover */
+.cards-section_services:hover::-webkit-scrollbar-thumb {
+    background:linear-gradient(135deg, #2b003a, #ae22ff, #ff4bff)
+}
+
+/* Optional hover enhancement to match BG gradient */
+.cards-section_services:hover::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2b003a, #ae22ff, #ff4bff);
+    background:linear-gradient(135deg, #2b003a, #ae22ff, #ff4bff)
+}
+
+/* Firefox */
+.cards-section_services {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155,0,135,0.3) transparent;
+}
+
+.cards-section_services:hover {
+    scrollbar-color: rgba(155,0,135,0.6) transparent;
+}
+
+/* ==========================
+   FAQ SECTION
+========================== */
 .faq-wrapper {
   width: 90%;
   max-width: 1200px;
@@ -478,7 +419,9 @@ main {
   transform: rotate(180deg);
 }
 
-/* ------------------ Contact Section Styles (Futuristic Glass Improvement) ------------------ */
+/* ==========================
+   CONTACT SECTION
+========================== */
 .contact-section {
   width: 100%;
   padding: 80px 20px;
@@ -496,16 +439,7 @@ main {
   transform: translateY(-5px);
 }
 
-.contact-section h2 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 30px;
-  letter-spacing: 1px;
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(255,0,255,0.5);
-}
-
-/* Contact Card Container */
+/* Contact Card */
 .contact-card {
   background: linear-gradient(145deg, rgba(153,0,135,0.8), rgba(71,0,74,0.8));
   padding: 50px;
@@ -557,14 +491,8 @@ main {
 }
 
 /* Form */
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 100%;
-}
-.contact-form input,
-.contact-form textarea {
+form input,
+form textarea {
   width: 100%;
   padding: 15px;
   border-radius: 12px;
@@ -575,19 +503,19 @@ main {
   backdrop-filter: blur(6px);
   transition: background 0.3s ease, transform 0.2s ease;
 }
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
+form input::placeholder,
+form textarea::placeholder {
   color: rgba(255,255,255,0.7);
 }
-.contact-form input:focus,
-.contact-form textarea:focus {
+form input:focus,
+form textarea:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.2);
   transform: scale(1.02);
 }
 
 /* Submit Button */
-.contact-form button {
+form button {
   padding: 15px;
   border: none;
   border-radius: 12px;
@@ -598,9 +526,9 @@ main {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
-.contact-form button:hover {
+form button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 0, 255, 0.5);
+  box-shadow: 0 6px 20px rgba(255, 0, 255,0.5);
 }
 
 /* Social Icons */
