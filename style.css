@@ -1,4 +1,42 @@
 /* ==========================
+           About
+========================== */
+
+@media (min-width: 768px) {
+    .about-section {
+        padding: 60px 20px;
+    }
+
+    .about-card {
+
+        max-width: 1024px; 
+        margin: 0 auto; 
+        padding: 40px; 
+    }
+
+    .about-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 40px; 
+        margin-top: 30px; 
+    }
+
+    .owner-photo {
+        width: 300px; 
+        height: 300px; 
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .owner-text {
+        flex-grow: 1;
+        font-size: 1.1rem;
+        line-height: 1.8;
+    }
+}
+
+
+/* ==========================
    RESET & ROOT VARIABLES
 ========================== */
 :root {
