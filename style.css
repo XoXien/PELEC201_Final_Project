@@ -1,3 +1,8 @@
+* {
+  font-family: "Playfair Display", serif;
+}
+
+
 /* ==========================
            About
 ========================== */
@@ -16,9 +21,9 @@
 
     .about-content {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 40px; 
-        margin-top: 30px; 
+        margin-bottom: 30px; 
     }
 
     .owner-photo {
@@ -54,7 +59,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: palyfair display, serif;
   background: linear-gradient(135deg, #2b003a, #ae22ff, #ff4bff);
   color: #fff;
   overflow-x: hidden;
@@ -361,16 +366,60 @@ body {
    HERO & ABOUT
 ========================== */
 
+/* ===== NAVBAR ===== */
+.main-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo {
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #00eaff;
+}
+
+/* ----- YOUR ORIGINAL STYLES BELOW ----- */
+
 .about-section {
     display: flex;
     justify-content: center;
     padding: 60px 20px;
 }
 
-
 .about-card {
     background: rgba(255, 255, 255, 0.1);
-    width: 1024px;                 
+    width: 1024px;
     max-width: 100%;
     padding: 40px;
     border-radius: 20px;
@@ -386,29 +435,25 @@ body {
     color: #fff;
 }
 
-
 .about-content {
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
-
 .owner-photo {
-    width: 480px !important;       
+    width: 480px !important;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
-
 .owner-text {
     font-size: 20px;
     color: #fff;
     line-height: 1.5;
-    flex: 1;                    
+    flex: 1;
 }
-
 
 @media (max-width: 900px) {
     .about-content {
@@ -417,7 +462,7 @@ body {
     }
 
     .owner-photo {
-        width: 90%;                
+        width: 90%;
         max-width: 480px;
     }
 
@@ -452,11 +497,11 @@ body {
     gap: 20px;
 }
 .card {
-    /* Sets the card frame size to 788px (748px image + 40px padding) */
+
     flex: 0 0 auto;
-    width: 788px; 
+    width: 700px; 
     
-    /* Enable Flexbox to control vertical alignment of content */
+
     display: flex;
     flex-direction: column; 
     
@@ -473,30 +518,30 @@ body {
     box-shadow: 0 12px 25px rgba(0,0,0,0.3);
 }
 .card img {
-    /* Fixed image size */
-    width: 748px;
-    height: 748px;
+  
+    width: 650px;
+    height: 650px;
     object-fit: cover;
     border-radius: 15px;
-    margin-bottom: 25px; /* Increased margin for better separation */
+    margin-bottom: 25px; 
     flex-shrink: 0;
 }
 .card h3 {
-    margin-bottom: 15px; /* Increased size */
-    font-size: 2rem; /* Enlarged title */
+    margin-bottom: 15px; 
+    font-size: 2rem; 
     flex-shrink: 0;
 }
 .card p {
-    /* Pushes content and button to the bottom by consuming vertical space */
+
     flex-grow: 1; 
-    font-size: 1.2rem; /* Enlarged text */
+    font-size: 1.2rem;
     line-height: 1.6;
-    margin-bottom: 20px; /* Space above the button */
+    margin-bottom: 20px; 
 }
 .card button {
-    margin-top: auto; /* Ensures the button is placed at the bottom */
-    padding: 15px 30px; /* Enlarged button padding */
-    font-size: 1.1rem; /* Enlarged button text */
+    margin-top: auto; 
+    padding: 15px 30px; 
+    font-size: 1.1rem; 
     background: #b000ff;
     color: #fff;
     border: none;
