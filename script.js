@@ -1,3 +1,29 @@
+// Add this JavaScript before closing body tag
+document.addEventListener('DOMContentLoaded', function() {
+  const logoCircle = document.querySelector('.logo-circle');
+  const teamSection = document.getElementById('teamSection');
+  
+  if (logoCircle && teamSection) {
+    logoCircle.addEventListener('click', function() {
+      // Hide logo circle
+      logoCircle.style.opacity = '0';
+      logoCircle.style.transform = 'scale(0.8)';
+      
+      // Show team section after animation
+      setTimeout(() => {
+        teamSection.classList.add('visible');
+        logoCircle.style.display = 'none';
+      }, 500);
+    });
+    
+    // Also make team section clickable to go to about section
+    teamSection.addEventListener('click', function() {
+      document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+});
+
+
 // ============================
 // Splash Screen Logic
 // ============================

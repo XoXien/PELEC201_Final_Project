@@ -1,165 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Client Feedbacks</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Feedbacks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* GLOBAL */
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            text-align: center;
+            background: linear-gradient(135deg, #3a0049, #7a0099, #c800ff);
+            background-size: 300% 300%;
+            animation: gradientMove 12s ease infinite;
+        }
 
-<style>
-/* GLOBAL */
-body {
-    margin: 0;
-    padding: 30px;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    text-align: center;
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    /* Premium violet gradient background */
-    background: linear-gradient(135deg, #3a0049, #7a0099, #c800ff);
-    background-size: 300% 300%;
-    animation: gradientMove 12s ease infinite;
-}
+        .container {
+            max-width: 1200px; /* Slightly wider for desktop */
+            margin: auto;
+        }
 
-/* Background animation */
-@keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        /* BACK BUTTON */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            color: #ffd6ff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(4px);
+            transition: 0.25s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-}
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.05);
+            color: white;
+        }
 
-/* BACK BUTTON */
-.back-btn, .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    padding: 10px 18px;
-    border-radius: 10px;
-    color: #ffd6ff;
-    text-decoration: none;
+        /* LOGO */
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 10px auto 20px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.4));
+        }
 
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255,255,255,0.25);
-    backdrop-filter: blur(4px);
-    transition: 0.25s ease;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
+        /* TITLE */
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffe7ff;
+            letter-spacing: 1px;
+        }
 
-.back-btn:hover,
-.back-link:hover {
-    background: rgba(255, 255, 255, 0.22);
-    transform: scale(1.05);
-    color: white;
-}
+        /* DESCRIPTION */
+        .description {
+            font-size: 22px;
+            line-height: 1.6;
+            width: 85%;
+            margin: 0 auto 40px;
+            color: #ffd6ff;
+            opacity: 0.9;
+        }
 
-/* LOGO */
-.logo {
-    width: 180px;
-    height: 180px;
-    margin: 10px auto 20px;
-    object-fit: contain;
-    display: block;
-    filter: drop-shadow(0px 5px 20px rgba(0,0,0,0.4));
-}
+        /* DRAGGABLE CAROUSEL – DESKTOP OPTIMIZED */
+        .carousel-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            margin: 0 auto 40px;
+            padding: 10px 0;
+            position: relative;
+            cursor: grab;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
 
-/* TITLE */
-h1 {
-    font-size: 42px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #ffe7ff;
-    letter-spacing: 1px;
-}
+        /* Hide scrollbar (Chrome/Safari) */
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
 
-/* DESCRIPTION TEXT */
-.description {
-    font-size: 22px;
-    line-height: 1.6;
-    width: 85%;
-    margin: 0 auto 40px;
-    color: #ffd6ff;
-    opacity: 0.9;
-}
+        .carousel-container:active,
+        .carousel-container.dragging {
+            cursor: grabbing;
+        }
 
-/* GALLERY */
-.gallery {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-}
+        .flip-card-wrapper {
+            display: flex;
+            gap: 32px; /* More breathing room on desktop */
+            padding: 0 40px; /* Prevent clipping at edges */
+            min-width: 100%;
+        }
 
-/* IMAGES */
-.gallery img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 18px;
+        /* FLIP CARD */
+        .flip-card {
+            width: 320px;
+            height: 320px;
+            flex: 0 0 auto; /* Prevent shrinking */
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
 
-    /* Beautiful glowing violet frame */
-    padding: 6px;
-    background: linear-gradient(145deg, #ff6bf7, #a100c0);
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+        }
 
-    /* Shadow for premium look */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-    transition: 0.25s ease;
-}
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
 
-.gallery img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 35px rgba(0,0,0,0.45);
-}
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-/* MOBILE */
-@media (max-width: 600px) {
-    .gallery img {
-        width: 45%;
-        height: auto;
-    }
-}
-</style>
+        .flip-card-front {
+            background: linear-gradient(145deg, #ff6bf7, #a100c0);
+        }
 
+        .flip-card-back {
+            background: linear-gradient(145deg, #c800ff, #7a0099);
+            transform: rotateY(180deg);
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.5;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .flip-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        /* STARS */
+        .stars {
+            margin-top: 12px;
+            color: #ffd700;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+        }
+
+        /* ——— DESKTOP ONLY (no mobile overrides) ——— */
+        /* Remove mobile media queries to enforce desktop sizing */
+        /* If you still want mobile support, keep them — but you said "desktop size" */
+    </style>
 </head>
 
 <body>
     <a href="/#services" class="back-link" aria-label="Back to Services page">Back to Services</a>
 
-<div class="container">
+    <div class="container">
+        <img src="3d logo.png" class="logo" alt="Your Logo Here">
 
-    
+        <h1>“Client Feedbacks”</h1>
 
-    <img src="3d logo.png" class="logo" alt="Your Logo Here">
+        <p class="description">
+            Every feedback tells a story of trust and satisfaction. Behind every
+            thank-you message and heartfelt review lies the joy of a well-celebrated
+            moment. Each word reminds us why we do what we do — to bring happiness,
+            ease, and beauty to every event we handle. From weddings to birthdays
+            and corporate gatherings, our clients’ smiles are the true measure of
+            our success. Every feedback fuels our passion, inspires our creativity,
+            and strengthens our promise of Asikaso, Serbisyo, at Alaga. Grateful
+            hearts, happy clients — that’s the story behind every #ASALieths moment.
+        </p>
 
-    <h1>“Client Feedbacks”</h1>
+        <!-- DRAGGABLE FLIP CARD CAROUSEL -->
+        <div class="carousel-container" id="carouselContainer">
+            <div class="flip-card-wrapper" id="flipCardWrapper">
+                <!-- Card 1 -->
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="LFEM010624.jpg" alt="Feedback Photo 1">
+                        </div>
+                        <div class="flip-card-back">
+                            “I just want to say Thank you to these amazing team for their services and support since the day we inquired. Napakasuccessful at sobrang saya ng kasal naming mag-asawa.”
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
 
-    <p class="description">
-        Every feedback tells a story of trust and satisfaction. Behind every
-        thank-you message and heartfelt review lies the joy of a well-celebrated
-        moment. Each word reminds us why we do what we do — to bring happiness,
-        ease, and beauty to every event we handle. From weddings to birthdays
-        and corporate gatherings, our clients’ smiles are the true measure of
-        our success. Every feedback fuels our passion, inspires our creativity,
-        and strengthens our promise of Asikaso, Serbisyo, at Alaga. Grateful
-        hearts, happy clients — that’s the story behind every #ASALieths moment.
-    </p>
+                <!-- Card 2 -->
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="LFEM011625.jpg" alt="Feedback Photo 2">
+                        </div>
+                        <div class="flip-card-back">
+                            “Professional, creative, and so kind! Our baby shower was everything we dreamed of. Highly recommend!”
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Card 3 -->
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="LFEM011825.jpg" alt="Feedback Photo 3">
+                        </div>
+                        <div class="flip-card-back">
+                            “The floral arrangements were breathtaking! Everything was perfectly timed and executed. 5 stars!”
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="gallery">
-        <img src="LFEM010624.jpg" alt="Feedback Photo ">
-        <img src="LFEM011625.jpg" alt="Feedback Photo ">
-        <img src="LFEM011825.jpg" alt="Feedback Photo ">
-        <img src="LFEM011924.jpg" alt="Feedback Photo ">
+                <!-- Card 4 -->
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="LFEM011924.jpg" alt="Feedback Photo 4">
+                        </div>
+                        <div class="flip-card-back">
+                            “From concept to execution, Lileth’s exceeded our expectations. Our corporate event was elegant and flawless!”
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
+    <script>
+        // SMOOTH DRAG-TO-SCROLL (DESKTOP + TOUCH)
+        const container = document.getElementById('carouselContainer');
 
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+
+        container.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            container.classList.add('dragging');
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+            e.preventDefault();
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.classList.remove('dragging');
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.classList.remove('dragging');
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 2;
+            container.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch support
+        container.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - container.offsetLeft;
+            const walk = (x - startX) * 2;
+            container.scrollLeft = scrollLeft - walk;
+            e.preventDefault(); // Prevent vertical scroll interference
+        });
+
+        // Prevent flip during drag
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('mousedown', (e) => {
+                if (isDragging) e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 </html>
 
