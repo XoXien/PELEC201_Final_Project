@@ -1,0 +1,31 @@
+// === SPAWN ONLY ONE PIPE (TOP OR BOTTOM) ===
+function spawnSinglePipe() {
+    const pipeTemplate = new lib.pipe();
+    const bounds = pipeTemplate.getBounds() || { width: PIPE_WIDTH, height: 400 };
+    const w = bounds.width;
+    const h = bounds.height;
+
+    const isTop = Math.random() > 0.5; // 50% chance top, 50% bottom
+    let yPos;
+
+    if (isTop) {
+        // Top obstacle: appears near ceiling
+        yPos = 100 + Math.random() * 150; // between y=100 and y=250
+    } else {
+        // Bottom obstacle: appears near ground
+        yPos = (GAME_HEIGHT - GROUND_HEIGHT) - (100 + Math.random() * 150); // y=550 to y=700
+    }
+
+    const pipe = new lib.pipe();
+    pipe.regX = w / 2;
+    pipe.regY = h / 2; // center anchor for simplicity
+    pipe.x = GAME_WIDTH + w / 2;
+    pipe.y = yPos;
+    stage.addChild(pipe);
+
+    pipes.push({ 
+        single: pipe,       // only one pipe
+        isTop: isTop,       // for debugging (optional)
+        passed: false 
+    });
+}

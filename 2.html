@@ -1,0 +1,364 @@
+// Enable mouse interactions
+stage.enableMouseOver(10);
+
+// Game constants
+const GAME_WIDTH = 480;
+const GAME_HEIGHT = 800;
+const GROUND_HEIGHT = 100;
+const BIRD_X = 120;
+const MIN_PIPE_GAP_CENTER = 180;
+const MAX_PIPE_GAP_CENTER = GAME_HEIGHT - GROUND_HEIGHT - 180;
+const PIPE_GAP = 220;
+const PIPE_WIDTH = 80;
+
+// Game state
+let bird;
+let button;
+let scoreText;
+let gameOverGroup;
+let medal;
+let score = 0;
+let gameActive = false;
+let gameStarted = false;
+let pipeSpeed = 3;
+let gravity = 0.6;
+let birdVelocity = 0;
+let lastPipeTime = 0;
+let pipes = [];
+let particles = [];
+let groundOffset = 0;
+
+// === CREATE UI ELEMENTS ===
+function createUI() {
+    // Sky background
+    const sky = new createjs.Shape();
+    sky.graphics.beginLinearGradientFill(["#87CEEB", "#E0F7FA"], [0, 1], 0, 0, 0, GAME_HEIGHT - GROUND_HEIGHT)
+         .drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT - GROUND_HEIGHT);
+    stage.addChild(sky);
+
+    // Ground
+    const ground = new createjs.Shape();
+    ground.graphics.beginFill("#8B4513").drawRect(0, GAME_HEIGHT - GROUND_HEIGHT, GAME_WIDTH, GROUND_HEIGHT);
+    stage.addChild(ground);
+
+    // Bird
+    bird = new lib.bird();
+    const birdBounds = bird.getBounds();
+    if (birdBounds) {
+        bird.regX = birdBounds.width / 2;
+        bird.regY = birdBounds.height / 2;
+    }
+    bird.x = BIRD_X;
+    bird.y = GAME_HEIGHT / 2;
+    bird.visible = false;
+    stage.addChild(bird);
+
+    // Score
+    scoreText = new createjs.Text("Score: 0", "bold 36px 'Press Start 2P', Arial", "#FFD700");
+    scoreText.textAlign = "center";
+    scoreText.x = GAME_WIDTH / 2;
+    scoreText.y = 40;
+    scoreText.visible = false;
+    scoreText.shadow = new createjs.Shadow("#000", 2, 2, 4);
+    stage.addChild(scoreText);
+
+    // Start button
+    button = new lib.button();
+    const btnBounds = button.getBounds();
+    if (btnBounds) {
+        button.regX = btnBounds.width / 2;
+        button.regY = btnBounds.height / 2;
+    }
+    button.x = GAME_WIDTH / 2;
+    button.y = GAME_HEIGHT / 2;
+    button.mouseEnabled = true;
+    stage.addChild(button);
+
+    // Game Over UI (hidden initially)
+    gameOverGroup = new createjs.Container();
+    gameOverGroup.visible = false;
+
+    const goBg = new createjs.Shape();
+    goBg.graphics.beginFill("rgba(0,0,0,0.7)").drawRect(0, 0, GAME_WIDTH, 200);
+    goBg.x = 0;
+    goBg.y = 160;
+    goBg.alpha = 0.85;
+
+    const gameOverText = new createjs.Text("Game Over", "bold 32px 'Press Start 2P', Arial", "#FF5252");
+    gameOverText.textAlign = "center";
+    gameOverText.x = GAME_WIDTH / 2;
+    gameOverText.y = 190;
+
+    const finalScoreLabel = new createjs.Text("Score", "bold 20px 'Press Start 2P', Arial", "#FFFFFF");
+    finalScoreLabel.textAlign = "center";
+    finalScoreLabel.x = GAME_WIDTH / 2 - 60;
+    finalScoreLabel.y = 240;
+
+    const finalScoreText = new createjs.Text("0", "bold 24px 'Press Start 2P', Arial", "#FFD700");
+    finalScoreText.textAlign = "center";
+    finalScoreText.x = GAME_WIDTH / 2 + 60;
+    finalScoreText.y = 240;
+
+    // Medal placeholder
+    medal = new createjs.Container();
+    medal.x = GAME_WIDTH / 2 - 60;
+    medal.y = 240;
+    medal.visible = false;
+
+    const retryText = new createjs.Text("Click to Play Again", "16px 'Press Start 2P', Arial", "#AAAAAA");
+    retryText.textAlign = "center";
+    retryText.x = GAME_WIDTH / 2;
+    retryText.y = 290;
+
+    gameOverGroup.addChild(goBg, gameOverText, finalScoreLabel, finalScoreText, medal, retryText);
+    stage.addChild(gameOverGroup);
+
+    // Store final score text for updating
+    gameOverGroup.finalScoreText = finalScoreText;
+}
+
+createUI();
+
+button.addEventListener("click", startGame);
+gameOverGroup.addEventListener("click", () => {
+    if (!gameActive) startGame();
+});
+
+// === START GAME ===
+function startGame() {
+    if (gameStarted) return;
+
+    resetGame();
+
+    gameActive = true;
+    gameStarted = true;
+    score = 0;
+    birdVelocity = 0;
+    pipeSpeed = 3;
+    lastPipeTime = 0;
+
+    button.visible = false;
+    bird.visible = true;
+    scoreText.visible = true;
+    gameOverGroup.visible = false;
+    scoreText.text = "Score: 0";
+
+    bird.x = BIRD_X;
+    bird.y = GAME_HEIGHT / 2;
+    bird.rotation = 0;
+
+    stage.addEventListener("stagemousedown", flap);
+    document.addEventListener("keydown", handleKey);
+
+    createjs.Ticker.addEventListener("tick", gameLoop);
+}
+
+function flap() {
+    if (!gameActive) return;
+    birdVelocity = -10;
+    
+    // Wing flap animation (if your bird symbol has frames)
+    if (bird.gotoAndPlay) bird.gotoAndPlay("flap");
+    
+    // Create particles
+    createParticles(bird.x, bird.y, 5, "#FFD700");
+}
+
+function handleKey(e) {
+    if (gameActive && (e.code === "Space" || e.key === " ")) {
+        flap();
+        e.preventDefault();
+    }
+    if (!gameActive && e.code === "KeyR") {
+        startGame();
+    }
+}
+
+
+// === GAME LOOP ===
+function gameLoop(event) {
+    if (!gameActive) return;
+
+    // Physics
+    birdVelocity += gravity;
+    bird.y += birdVelocity;
+
+    // Smooth rotation
+    const targetRot = Math.min(90, Math.max(-30, birdVelocity * 2));
+    bird.rotation += (targetRot - bird.rotation) * 0.1;
+
+    // Bounds check (ceiling & ground)
+    const birdH = bird.getBounds()?.height / 2 || 15;
+    if (bird.y - birdH < 0 || bird.y + birdH > GAME_HEIGHT - GROUND_HEIGHT) {
+        createParticles(bird.x, bird.y, 15, "#FF5252");
+        gameOver();
+        return;
+    }
+
+    // Spawn pipes
+    lastPipeTime += event.delta;
+    if (lastPipeTime > 1500 - Math.min(1000, score * 20)) {
+        spawnPipePair(); // ← ONLY THIS
+        lastPipeTime = 0;
+    }
+
+    // Update pipes
+    for (let i = pipes.length - 1; i >= 0; i--) {
+        const p = pipes[i];
+        p.top.x -= pipeSpeed;
+        p.bottom.x -= pipeSpeed;
+
+        if (p.top.x < -100) {
+            stage.removeChild(p.top, p.bottom);
+            pipes.splice(i, 1);
+            continue;
+        }
+
+        // ✅ GAME OVER ON PIPE TOUCH
+        if (checkCollision(bird, p.top) || checkCollision(bird, p.bottom)) {
+            createParticles(bird.x, bird.y, 15, "#FF5252");
+            gameOver();
+            return;
+        }
+
+        if (!p.passed && p.top.x + (p.top.getBounds()?.width || PIPE_WIDTH) < BIRD_X) {
+            p.passed = true;
+            score++;
+            scoreText.text = "Score: " + score;
+            pipeSpeed = 3 + Math.min(5, score * 0.1);
+        }
+    }
+
+    // Update particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.y += p.vy;
+        p.x += p.vx;
+        p.alpha -= 0.015;
+        if (p.alpha <= 0) {
+            stage.removeChild(p);
+            particles.splice(i, 1);
+        }
+    }
+}
+
+// === SPAWN PIPE PAIR ===
+function spawnPipePair() {
+    const gapCenter = MIN_PIPE_GAP_CENTER + Math.random() * (MAX_PIPE_GAP_CENTER - MIN_PIPE_GAP_CENTER);
+    const pipeTemplate = new lib.pipe();
+    const bounds = pipeTemplate.getBounds() || { width: PIPE_WIDTH, height: 400 };
+    const w = bounds.width;
+    const h = bounds.height;
+
+    const topPipe = new lib.pipe();
+    topPipe.regX = w / 2;
+    topPipe.regY = h;
+    topPipe.x = GAME_WIDTH + w / 2;
+    topPipe.y = gapCenter - PIPE_GAP / 2;
+    stage.addChild(topPipe);
+
+    const bottomPipe = new lib.pipe();
+    bottomPipe.regX = w / 2;
+    bottomPipe.regY = 0;
+    bottomPipe.x = GAME_WIDTH + w / 2;
+    bottomPipe.y = gapCenter + PIPE_GAP / 2;
+    bottomPipe.scaleY = -1;
+    stage.addChild(bottomPipe);
+
+    pipes.push({ top: topPipe, bottom: bottomPipe, passed: false });
+}
+
+// === PARTICLE EFFECTS ===
+function createParticles(x, y, count, color) {
+    for (let i = 0; i < count; i++) {
+        const p = new createjs.Shape();
+        p.graphics.beginFill(color).drawCircle(0, 0, Math.random() * 3 + 1);
+        p.x = x;
+        p.y = y;
+        p.vx = (Math.random() - 0.5) * 6;
+        p.vy = (Math.random() - 0.5) * 6 - 2;
+        p.alpha = 1;
+        stage.addChild(p);
+        particles.push(p);
+    }
+}
+
+// === COLLISION ===
+if (checkCollision(bird, p.top) || checkCollision(bird, p.bottom)) {
+    createParticles(bird.x, bird.y, 15, "#FF5252");
+    gameOver(); // ✅ THIS IS CORRECT
+    return;
+}
+// === GAME OVER ===
+function gameOver() {
+    gameActive = false;
+    gameStarted = false;
+
+    stage.removeEventListener("stagemousedown", flap);
+    document.removeEventListener("keydown", handleKey);
+    createjs.Ticker.removeEventListener("tick", gameLoop);
+
+    // Show final score
+    gameOverGroup.finalScoreText.text = score.toString();
+    gameOverGroup.visible = true;
+
+    // Show medal
+    medal.visible = true;
+    medal.removeAllChildren();
+    let medalColor = "#FFFFFF"; // default
+    let medalSize = 30;
+    if (score >= 20) {
+        medalColor = "#FFD700"; // Gold
+    } else if (score >= 10) {
+        medalColor = "#C0C0C0"; // Silver
+    } else if (score >= 5) {
+        medalColor = "#CD7F32"; // Bronze
+    } else {
+        medal.visible = false;
+    }
+    
+    if (medal.visible) {
+        const med = new createjs.Shape();
+        med.graphics.beginFill(medalColor).drawCircle(0, 0, medalSize / 2);
+        med.graphics.beginFill("#000").drawCircle(0, 0, medalSize / 6);
+        medal.addChild(med);
+    }
+}
+
+// === RESET ===
+function resetGame() {
+    pipes.forEach(p => {
+        stage.removeChild(p.top, p.bottom); // ✅ correct for pairs
+    });
+    pipes = [];
+
+    // Clean particles
+    particles.forEach(p => stage.removeChild(p));
+    particles = [];
+
+    // Reset bird
+    bird.x = BIRD_X;
+    bird.y = GAME_HEIGHT / 2;
+    bird.rotation = 0;
+    birdVelocity = 0;
+    if (bird.gotoAndStop) bird.gotoAndStop("idle");
+
+    // Reset score & speed
+    score = 0;
+    pipeSpeed = 3;
+    lastPipeTime = 0;
+
+    // Hide UI
+    bird.visible = false;
+    scoreText.visible = false;
+    gameOverGroup.visible = false;
+}
+
+function resetUI() {
+    resetGame();
+    button.visible = true;
+    gameActive = false;
+    gameStarted = false;
+    gameOverGroup.visible = false;
+    medal.visible = false;
+}

@@ -2,6 +2,11 @@
   font-family: "Playfair Display", serif;
 }
 
+/* ==========================
+        1st homepage
+========================== */
+
+
 
 /* ==========================
            About
@@ -66,6 +71,12 @@ html, body {
   cursor: default;
   user-select: none;
 }
+body {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
 /* ==========================
    APP WRAPPER & MAIN
